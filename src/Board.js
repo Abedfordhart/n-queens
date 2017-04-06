@@ -80,7 +80,7 @@
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
       var count = 0;
-      for(var i = 0; i < this.rows().length; i++) {
+      for (var i = 0; i < this.rows().length; i++) {
         count += this.get(rowIndex)[i];
       }
       return count > 1;
@@ -88,8 +88,8 @@
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      for(var i = 0; i < this.rows().length; i++){
-        if(this.hasRowConflictAt(i)) {
+      for (var i = 0; i < this.rows().length; i++) {
+        if (this.hasRowConflictAt(i)) {
           return true;
         }
       }
@@ -102,9 +102,9 @@
     // --------------------------------------------------------------
     //
     // test if a specific column on this board contains a conflict
-    hasColConflictAt: function(colIndex) {
+    hasColConflictAt: function (colIndex) {
       var count = 0;
-      for(var i = 0; i < this.rows().length; i++) {
+      for (var i = 0; i < this.rows().length; i++) {
         count += this.get(i)[colIndex];
       }
       return count > 1;
@@ -112,7 +112,7 @@
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      for(var i = 0; i < this.rows().length; i++){
+      for (var i = 0; i < this.rows().length; i++) {
         if(this.hasColConflictAt(i)) {
           return true;
         }
@@ -129,10 +129,11 @@
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
       var colIndex = majorDiagonalColumnIndexAtFirstRow;
       var count = 0;
+      var size = this.rows().length;
       
       if (colIndex >= 0) {
-        for (var i = 0; i < this.rows().length; i++) {
-          if (colIndex < this.rows().length) {
+        for (var i = 0; i < size; i++) {
+          if (colIndex < size) {
             count += this.get(i)[colIndex];
             colIndex++;
           }
@@ -140,7 +141,7 @@
       } else {
         var loopStart = -colIndex;
         var lookUpColIndex = 0;
-        for (var i = loopStart; i < this.rows().length; i++) {
+        for (var i = loopStart; i < size; i++) {
           count += this.get(i)[lookUpColIndex];
           lookUpColIndex++;
         }
@@ -151,7 +152,8 @@
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      for (var i = -(this.rows().length - 1); i < this.rows().length; i++) {
+      var size = this.rows().length;
+      for (var i = -(size - 1); i < size; i++) {
         if (this.hasMajorDiagonalConflictAt(i)) {
           return true;
         }
@@ -168,18 +170,19 @@
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
       var colIndex = minorDiagonalColumnIndexAtFirstRow;
       var count = 0;
+      var size = this.rows().length;
       
-      if (colIndex < this.rows().length) {
-        for (var i = 0; i < this.rows().length; i++) {
+      if (colIndex < size) {
+        for (var i = 0; i < size; i++) {
           if (colIndex >= 0) {
             count += this.get(i)[colIndex];
             colIndex--;
           }
         }
       } else {
-        var loopStart = colIndex - this.rows().length + 1;
-        var lookUpColIndex = this.rows().length - 1;
-        for (var i = loopStart; i < this.rows().length; i++) {
+        var loopStart = colIndex - size + 1;
+        var lookUpColIndex = size - 1;
+        for (var i = loopStart; i < size; i++) {
           count += this.get(i)[lookUpColIndex];
           lookUpColIndex--;
         }
@@ -190,7 +193,8 @@
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      for (var i = 2 * this.rows().length - 1; i >= 0; i--) {
+      var size = this.rows().length;
+      for (var i = 2 * size - 1; i >= 0; i--) {
         if (this.hasMinorDiagonalConflictAt(i)) {
           return true;
         }
