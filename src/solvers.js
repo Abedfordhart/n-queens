@@ -26,7 +26,14 @@ window.findNRooksSolution = function(numRooks) {
 
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
 window.countNRooksSolutions = function(n) {
-  var solutionCount = undefined; //fixme
+  var solutionCounter = function(n) {
+    if (n === 0) {
+      return 1;
+    } else {
+      return n * solutionCounter(n - 1); 
+    }
+  };
+  var solutionCount = solutionCounter(n);
 
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
   return solutionCount;
